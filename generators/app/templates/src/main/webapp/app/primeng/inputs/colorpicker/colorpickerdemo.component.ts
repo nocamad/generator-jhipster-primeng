@@ -30,7 +30,7 @@ export class ColorpickerDemoComponent implements OnInit {
         this.colorFormat3 = '0000FF';
     }
 
-    onChangeColor(event: any): void {
+    onChangeColor(event: object): void {
         this.messageService.add({severity: 'info', summary: 'The new Color is selected ' + event.value});
     }
 

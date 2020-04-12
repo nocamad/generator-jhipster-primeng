@@ -24,7 +24,7 @@ export class OverlayPanelDemoComponent implements OnInit {
         this.activeIndex = 0;
     }
 
-    selectScore(event: any, score: Score, overlaypanel: OverlayPanel): void {
+    selectScore(event: object, score: Score, overlaypanel: OverlayPanel): void {
         this.marks = score.marks;
         this.percentage = score.percentage;
         overlaypanel.toggle(event);

@@ -28,22 +28,22 @@ export class PicklistDemoComponent implements OnInit {
         this.targetCountries = [];
     }
 
-    onMoveToTarget(event: any): void {
+    onMoveToTarget(event: object): void {
         this.messageService.add(
             {severity: 'info', summary: 'onMoveToTarget Event', detail: event.items});
     }
 
-    onMoveToSource(event: any): void {
+    onMoveToSource(event: object): void {
         this.messageService.add(
             {severity: 'info', summary: 'onMoveToSource Event', detail: event.items});
     }
 
-    onSourceReorder(event: any): void {
+    onSourceReorder(event: object): void {
         this.messageService.add(
             {severity: 'info', summary: 'onSourceReorder Event', detail: event.items});
     }
 
-    onTargetReorder(event: any): void {
+    onTargetReorder(event: object): void {
         this.messageService.add(
             {severity: 'info', summary: 'onTargetReorder Event', detail: event.items});
     }

@@ -27,13 +27,13 @@ export class AutocompleteDemoComponent implements OnInit {
     activeIndex = 0;
 
     constructor(private countryService: CountryService, private messageService: MessageService) {
-        this.country = null;
+        this.country = {} as Country;
         this.countries = [];
         this.topcountry = '';
         this.topcountrySingle = '';
         this.topAsianCountry = '';
-        this.countryInstance = null;
-        this.customCountry = null;
+        this.countryInstance = {} as Country;
+        this.customCountry = {} as Country;
         this.topAsiaCountries = ['Singapore', 'Hong Kong', 'South Korea', 'Japan', 'Israel',
             'Brunei', 'Qatar', 'Cyprus', 'Saudi Arabia', 'United Arab Emirates'];
         this.filteredCountries = [];
@@ -62,42 +62,42 @@ export class AutocompleteDemoComponent implements OnInit {
         this.messageService.add({severity: 'info', summary: 'The autocomplete selected item is removed'});
     }
 
-    onClearInput(event: any): void {
+    onClearInput(): void {
         this.messageService.add({severity: 'info', summary: 'The autocomplete input is cleared'});
     }
 
-    filterCountryInstances(event: any): void {
+    filterCountryInstances(event: object): void {
         const query = event.query;
         this.countryService.getCountries().subscribe((countries: any) => {
             this.filteredCountryInstances = this.filterCountry(query, countries.data);
         });
     }
 
-    filterCountries(event: any): void {
+    filterCountries(event: object): void {
         const query = event.query;
         this.countryService.getCountries().subscribe((countries: any) => {
             this.filteredCountries = this.filterCountry(query, countries.data);
         });
     }
 
-    filterCountriesMultiple(event: any): void {
+    filterCountriesMultiple(event: object): void {
         const query = event.query;
         this.countryService.getCountries().subscribe((countries: any) => {
             this.filteredCountriesMultiple = this.filterCountry(query, countries.data);
         });
     }
 
-    filterCustomCountries(event: any): void {
+    filterCustomCountries(event: object): void {
         const query = event.query;
         this.countryService.getCountries().subscribe((countries: any) => {
             this.filteredCustomCountries = this.filterCountry(query, countries.data);
         });
     }
 
-    filterTopAsiaCountries(event: any): void {
+    filterTopAsiaCountries(event: object): void {
         this.filteredTopAsiaCountries = [];
         for (const country of this.topAsiaCountries) {
-            if (country.toLowerCase().indexOf(event.query.toLowerCase()) === 0) {
+            if (country.toLowerCase().startsWith(event.query.toLowerCase())) {
                 this.filteredTopAsiaCountries.push(country);
             }
         }
@@ -110,7 +110,7 @@ export class AutocompleteDemoComponent implements OnInit {
         }, 100);
     }
 
-    filterCountry(query: any, countries: Country[]): Country[] {
+    filterCountry(query: string, countries: Country[]): Country[] {
         const filtered: any[] = [];
         for (const country of countries) {
             if (country.name.toLowerCase().indexOf(query.toLowerCase()) === 0) {

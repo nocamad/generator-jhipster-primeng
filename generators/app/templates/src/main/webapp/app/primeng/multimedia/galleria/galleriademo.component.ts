@@ -55,7 +55,7 @@ export class GalleriaDemoComponent implements OnInit {
         });
     }
 
-    onImageClicked($event: any): void {
+    onImageClicked($event: object): void {
         window.open($event.image.source, '_blank');
     }
 

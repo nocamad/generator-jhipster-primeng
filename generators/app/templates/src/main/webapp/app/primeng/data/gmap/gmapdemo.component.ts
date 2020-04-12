@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { JhiLanguageService } from 'ng-jhipster';
 import { MessageService } from 'primeng/api';
 
+// tslint:disable-next-line
 declare var google: any;
 
 @Component({
@@ -53,18 +54,18 @@ export class GmapDemoComponent implements OnInit {
         this.infoWindow = new google.maps.InfoWindow();
     }
 
-    handleMapReady(event: any): void {
+    handleMapReady(event: object): void {
         this.map = event.map;
         this.messageService.add({severity: 'info', summary: 'Map is ready', detail: 'Map is loaded'});
     }
 
-    handleMapClick(event: any): void {
+    handleMapClick(event: object): void {
         this.dialogVisible = true;
         this.selectedPosition = event.latLng;
         this.messageService.add({severity: 'info', summary: 'Map is clicked', detail: this.selectedPosition});
     }
 
-    handleOverlayClick(event: any): void {
+    handleOverlayClick(event: object): void {
         const isMarker = event.overlay.getTitle !== undefined;
 
         if (isMarker) {
@@ -79,26 +80,26 @@ export class GmapDemoComponent implements OnInit {
         }
     }
 
-    handleZoomChanged(event: any): void {
+    handleZoomChanged(event: object): void {
         this.messageService.add({severity: 'info', summary: 'The map zoom options are changed'});
     }
 
-    handleMapDragEnd(event: any): void {
+    handleMapDragEnd(event: object): void {
         this.messageService.add({severity: 'info', summary: 'The map drag is reached end'});
     }
 
     addMarker(): void {
         this.overlaysEvents.push(new google.maps.Marker({position: {lat: this.selectedPosition.lat(),
             lng: this.selectedPosition.lng()}, title: this.markerTitle, draggable: this.draggable}));
-        this.markerTitle = null;
+        this.markerTitle = '';
         this.dialogVisible = false;
     }
 
-    handleDragStart(event: any): void {
+    handleDragStart(event: object): void {
         this.messageService.add({severity: 'info', summary: 'Marker Drag started', detail: event.overlay.getTitle()});
     }
 
-    handleDragEnd(event: any): void {
+    handleDragEnd(event: object): void {
         this.messageService.add({severity: 'info', summary: 'Marker Dragged', detail: event.overlay.getTitle()});
     }
 

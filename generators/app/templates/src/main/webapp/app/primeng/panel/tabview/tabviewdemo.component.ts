@@ -13,11 +13,11 @@ export class TabViewDemoComponent implements OnInit {
     constructor(private messageService: MessageService) {
     }
 
-    onTabChange(event: any): void {
+    onTabChange(event: object): void {
         this.messageService.add({severity: 'info', summary: 'Tab Expanded', detail: 'Index: ' + event.index});
     }
 
-    onTabClose(event: any): void {
+    onTabClose(event: object): void {
         this.messageService.add({severity: 'info', summary: 'Tab closed', detail: 'Index: ' + event.index});
     }
 

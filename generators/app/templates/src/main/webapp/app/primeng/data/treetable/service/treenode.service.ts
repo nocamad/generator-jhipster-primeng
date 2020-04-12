@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {Observable} from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
-import {TreeNode} from 'primeng/components/common/api';
+import {Observable} from 'rxjs/internal/Observable';
+import { map } from 'rxjs/operators';
+import {TreeNode} from 'primeng/common/api';
 
 @Injectable()
 export class TreeNodeService {
@@ -12,6 +12,6 @@ export class TreeNodeService {
 
     getTouristPlaces(): Observable<any[]> {
         return this.http.get('content/primeng/assets/data/json/places/places.json')
-            .map(response => response as any[]);
+            .pipe(map((response: any[]) => response));
     }
 }

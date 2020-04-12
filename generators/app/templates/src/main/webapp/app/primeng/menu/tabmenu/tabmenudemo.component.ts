@@ -14,7 +14,7 @@ export class TabMenuDemoComponent implements OnInit {
     private expandeditems: MenuItem[];
 
     constructor(private messageService: MessageService) {
-        this.activeItem = null;
+        this.activeItem = {} as MenuItem;
         this.items = [];
         this.expandeditems = [];
     }

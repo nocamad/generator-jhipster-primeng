@@ -29,9 +29,9 @@ export class TreeDemoComponent implements OnInit {
 
     selectedPlace: TreeNode;
 
-    selectedPlaces: TreeNode;
+    selectedPlaces: TreeNode[];
 
-    selectMultiplePlaces: TreeNode;
+    selectMultiplePlaces: TreeNode[];
 
     selectedTour: TreeNode[];
 
@@ -51,12 +51,13 @@ export class TreeDemoComponent implements OnInit {
         this.dragDropTreeOne = [];
         this.dragDropTreeTwo = [];
         this.programmaticTree = [];
-        this.selectedPlace = null;
-        this.selectedPlaces = null;
-        this.selectMultiplePlaces = null;
+        this.selectedPlace = {} as TreeNode;
+        this.selectedPlaces = [];
+        this.selectMultiplePlaces = [];
         this.selectedTour = [];
         this.selectedTouristPlace = [];
         this.items = [];
+        this.expandingTree = {};
     }
 
     ngOnInit(): void {
@@ -87,24 +88,24 @@ export class TreeDemoComponent implements OnInit {
         ];
 
         this.items = [
-            {label: 'View', icon: 'fa fa-search', command: (event: any) => this.viewFile(this.selectedTouristPlace)},
-            {label: 'Unselect', icon: 'fa fa-close', command: (event: any) => this.unselectFile()}
+            {label: 'View', icon: 'fa fa-search', command: (event: object) => this.viewFile(this.selectedTouristPlace)},
+            {label: 'Unselect', icon: 'fa fa-close', command: (event: object) => this.unselectFile()}
         ];
     }
 
-    nodeSelect(event: any): void {
+    nodeSelect(event: object): void {
         this.messageService.add({severity: 'info', summary: 'Node Selected', detail: event.node.label});
     }
 
-    nodeUnselect(event: any): void {
+    nodeUnselect(event: object): void {
         this.messageService.add({severity: 'info', summary: 'Node Unselected', detail: event.node.label});
     }
 
-    nodeExpandMessage(event: any): void {
+    nodeExpandMessage(event: object): void {
         this.messageService.add({severity: 'info', summary: 'Node Expanded', detail: event.node.label});
     }
 
-    nodeExpand(event: any): void {
+    nodeExpand(event: object): void {
         if (event.node) {
             // in a real application, make a call to a remote url to load children of the current node and add the new nodes as children
             this.nodeService.getTouristPlaces().subscribe((nodes: any) => event.node.children = nodes.data);
@@ -116,7 +117,7 @@ export class TreeDemoComponent implements OnInit {
     }
 
     unselectFile(): void {
-        this.selectedTouristPlace = null;
+        this.selectedTouristPlace = {} as TreeNode;
     }
 
     expandAll(): void {

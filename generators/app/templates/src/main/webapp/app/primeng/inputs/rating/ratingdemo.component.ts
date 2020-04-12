@@ -34,12 +34,12 @@ export class RatingDemoComponent implements OnInit {
         this.selectedType = '';
     }
 
-    handleRate(event: any): void {
+    handleRate(event: object): void {
         this.messageService.add(
             {severity: 'info', summary: 'You have rated with ' + event.value});
     }
 
-    handleCancel(event: any): void {
+    handleCancel(event: object): void {
         this.messageService.add(
             {severity: 'info', summary: 'Rating is Cancelled'});
     }

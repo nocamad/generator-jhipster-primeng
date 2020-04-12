@@ -13,7 +13,7 @@ export class BreadcrumbDemoComponent implements OnInit {
     private items: MenuItem[];
 
     constructor(private messageService: MessageService) {
-        this.home = null;
+        this.home = {} as MenuItem;
         this.items = [];
     }
 

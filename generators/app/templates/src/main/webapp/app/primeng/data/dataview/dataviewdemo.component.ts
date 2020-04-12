@@ -37,7 +37,7 @@ export class DataViewDemoComponent implements OnInit {
         this.inlineBrowsers = [];
         this.lazyloadingBrowsers = [];
         this.loaderBrowsers = [];
-        this.selectedBrowser = null;
+        this.selectedBrowser = {} as Browser;
 
         this.displayDialog = false;
         this.sortOptions = [];
@@ -78,10 +78,10 @@ export class DataViewDemoComponent implements OnInit {
     }
 
     onDialogHide(): void {
-        this.selectedBrowser = null;
+        this.selectedBrowser = {} as Browser;
     }
 
-    loadData(event: any): void {
+    loadData(event: object): void {
         const start = event.first; // event.first = First row offset
         const end = start + event.rows; // event.rows = Number of rows per page
         this.browserService.getBrowsers().subscribe((browsers: any) => this.lazyloadingBrowsers = browsers.data.slice(start, end));

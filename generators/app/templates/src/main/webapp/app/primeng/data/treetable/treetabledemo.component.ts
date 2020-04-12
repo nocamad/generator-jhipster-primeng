@@ -48,8 +48,8 @@ export class TreeTableDemoComponent implements OnInit {
         this.templateTreeTable = [];
         this.contextmenuTreeTable =[];
         this.lazyTreeTable = [];
-        this.selectedTouristPlace = null;
-        this.selectedPlace = null;
+        this.selectedTouristPlace = {} as TreeNode;
+        this.selectedPlace = {} as TreeNode;
         this.selectedMultiTouristPlaces = [];
         this.selectedMultiTouristPlaces = [];
         this.items = [];
@@ -83,19 +83,19 @@ export class TreeTableDemoComponent implements OnInit {
         this.loading = true;
     }
 
-    nodeSelect(event: any): void {
+    nodeSelect(event: object): void {
         this.messageService.add({severity: 'info', summary: 'Node Selected', detail: event.node.data.name});
     }
 
-    nodeUnselect(event: any): void {
+    nodeUnselect(event: object): void {
         this.messageService.add({severity: 'info', summary: 'Node Unselected', detail: event.node.data.name});
     }
 
-    onRowDblclick(event: any): void {
+    onRowDblclick(event: object): void {
         this.messageService.add({severity: 'info', summary: 'Node Selected', detail: 'The TreeTable row double click is invoked'});
     }
 
-    nodeExpand(event: any): void {
+    nodeExpand(event: object): void {
         if (event.node) {
             // in a real application, make a call to a remote url to load children of the current node and add the new nodes as children
             this.nodeService.getTouristPlaces().subscribe((nodes: any) => event.node.children = nodes.data);
@@ -107,11 +107,13 @@ export class TreeTableDemoComponent implements OnInit {
     }
 
     deleteNode(node: TreeNode): void {
-        node.parent.children = node.parent.children.filter(n => n.data !== node.data);
+        if (node.parent) {
+            node.parent.children = node.parent.children.filter(n => n.data !== node.data);
+        }
         this.messageService.add({severity: 'info', summary: 'Node Deleted', detail: node.data.name});
     }
 
-    loadNodes(event): void {
+    loadNodes(event: object): void {
         this.loading = true;
 
         // in a production application, make a remote request to load data using state metadata from event
@@ -141,7 +143,7 @@ export class TreeTableDemoComponent implements OnInit {
         }, 1000);
     }
 
-    onNodeExpandLazy(event): void {
+    onNodeExpandLazy(event: object): void {
         this.loading = true;
 
         setTimeout(() => {

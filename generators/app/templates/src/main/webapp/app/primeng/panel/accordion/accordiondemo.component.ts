@@ -15,11 +15,11 @@ export class AccordionDemoComponent implements OnInit {
         this.accordionActiveIndexes = [0, 2];
     }
 
-    onTabClose(event: any): void {
+    onTabClose(event: object): void {
         this.messageService.add({severity: 'info', summary: 'Tab Closed', detail: 'Index: ' + event.index});
     }
 
-    onTabOpen(event: any): void {
+    onTabOpen(event: object): void {
         this.messageService.add({severity: 'info', summary: 'Tab Expanded', detail: 'Index: ' + event.index});
     }
 

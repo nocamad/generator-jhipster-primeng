@@ -15,7 +15,7 @@ export class CaptchaDemoComponent implements OnInit {
 
     ngOnInit(): void {}
 
-    showResponse(event): void {
+    showResponse(event: object): void {
     this.messageService.add({severity: 'info', summary: 'Succees', detail: 'User Responded'});
     }
 

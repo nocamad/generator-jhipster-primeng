@@ -48,28 +48,28 @@ export class StepsDemoComponent implements OnInit {
     ngOnInit(): void {
         this.items = [{
             label: 'Personal',
-            command: (event: any) => {
+            command: (event: object) => {
                 this.activeIndex = 0;
                 this.messageService.add({severity: 'info', summary: 'First Step', detail: event.item.label});
             }
         },
             {
                 label: 'Seat',
-                command: (event: any) => {
+                command: (event: object) => {
                     this.activeIndex = 1;
                     this.messageService.add({severity: 'info', summary: 'Seat Selection', detail: event.item.label});
                 }
             },
             {
                 label: 'Payment',
-                command: (event: any) => {
+                command: (event: object) => {
                     this.activeIndex = 2;
                     this.messageService.add({severity: 'info', summary: 'Pay with CC', detail: event.item.label});
                 }
             },
             {
                 label: 'Confirmation',
-                command: (event: any) => {
+                command: (event: object) => {
                     this.activeIndex = 3;
                     this.messageService.add({severity: 'info', summary: 'Last Step', detail: event.item.label});
                 }

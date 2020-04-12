@@ -29,7 +29,7 @@ export class SelectButtonDemoComponent implements OnInit {
         this.modes = [];
     }
 
-    onChange(event: any): void {
+    onChange(event: object): void {
         this.messageService.add(
             {severity: 'info', summary: 'Library name is changed'});
     }

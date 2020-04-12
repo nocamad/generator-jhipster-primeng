@@ -24,7 +24,7 @@ export class OrderlistDemoComponent implements OnInit {
         });
     }
 
-    onReorder(event: any): void {
+    onReorder(event: object): void {
         this.messageService.add(
             {severity: 'info', summary: 'onReorder Event', detail: event.items});
     }

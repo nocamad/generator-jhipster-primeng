@@ -127,7 +127,7 @@ export class TableDemoComponent implements OnInit {
         this.browser = new MyBrowser();
         this.basicBrowsers = [];
         this.browsers = [];
-        this.selectedBrowser = null;
+        this.selectedBrowser = new MyBrowser();
         this.selectedBrowsers = [];
         this.displayDialog = false;
         this.stacked = false;
@@ -175,89 +175,89 @@ export class TableDemoComponent implements OnInit {
 
     }
 
-    onRowClick(event: any): void {
+    onRowClick(event: object): void {
         this.messageService.add({severity: 'info', summary: 'Browser clicked', detail: event.data.engine + ' - ' + event.data.browser});
     }
 
-    onRowDblClick(event: any): void {
+    onRowDblClick(event: object): void {
         this.messageService.add({severity: 'info', summary: 'Browser double clicked', detail: event.data.engine + ' - ' + event.data.browser});
     }
 
-    onRowSelect(event: any): void {
+    onRowSelect(event: object): void {
         this.messageService.add({severity: 'info', summary: 'Type of selection:', detail: event.type});
         this.messageService.add({severity: 'info', summary: 'Browser Selected', detail: event.data.engine + ' - ' + event.data.browser});
     }
 
-    onRowUnselect(event: any): void {
+    onRowUnselect(event: object): void {
         this.messageService.add({severity: 'info', summary: 'Type of selection:', detail: event.type});
         this.messageService.add({severity: 'info', summary: 'Browser Unselected', detail: event.data.engine + ' - ' + event.data.browser});
     }
 
-    onHeaderCheckboxToggle(event: any): void {
+    onHeaderCheckboxToggle(event: object): void {
         this.messageService.add({severity: 'info', summary: 'Header checkbox toggled:', detail: event.checked});
     }
 
-    onContextMenuSelect(event: any): void {
+    onContextMenuSelect(event: object): void {
         this.messageService.add({severity: 'info', summary: 'Selected data', detail: event.data.engine + ' - ' + event.data.browser});
     }
 
-    onColResize(event: any): void {
+    onColResize(event: object): void {
         this.messageService.add({severity: 'info', summary: 'Resized column header' + event.element,
             detail: 'Change of column width' +  event.delta + 'px'});
     }
 
-    onColReorder(event: any): void {
+    onColReorder(event: object): void {
         this.messageService.add({severity: 'info', summary: 'Index of dragged column', detail: event.dragIndex});
         this.messageService.add({severity: 'info', summary: 'Index of dropped column', detail: event.dropIndex});
         this.messageService.add({severity: 'info', summary: 'Columns array after reorder', detail: event.columns});
     }
 
-    onEditInit(event: any): void {
+    onEditInit(event: object): void {
         this.messageService.add({severity: 'info', summary: 'Column is ', detail: event.column});
         this.messageService.add({severity: 'info', summary: 'Row data', detail: event.data.engine + ' - ' + event.data.browser});
     }
 
-    onEdit(event: any): void {
+    onEdit(event: object): void {
         this.messageService.add({severity: 'info', summary: 'Row index', detail: event.index});
         this.messageService.add({severity: 'info', summary: 'Column is ', detail: event.column});
         this.messageService.add({severity: 'info', summary: 'Row data', detail: event.data.engine + ' - ' + event.data.browser});
     }
-    onEditComplete(event: any): void {
-        this.messageService.add({severity: 'info', summary: 'Row index', detail: event.index});
-        this.messageService.add({severity: 'info', summary: 'Column is ', detail: event.column});
-        this.messageService.add({severity: 'info', summary: 'Row data', detail: event.data.engine + ' - ' + event.data.browser});
-    }
-
-    onEditCancel(event: any): void {
+    onEditComplete(event: object): void {
         this.messageService.add({severity: 'info', summary: 'Row index', detail: event.index});
         this.messageService.add({severity: 'info', summary: 'Column is ', detail: event.column});
         this.messageService.add({severity: 'info', summary: 'Row data', detail: event.data.engine + ' - ' + event.data.browser});
     }
 
-    onPage(event: any): void {
+    onEditCancel(event: object): void {
+        this.messageService.add({severity: 'info', summary: 'Row index', detail: event.index});
+        this.messageService.add({severity: 'info', summary: 'Column is ', detail: event.column});
+        this.messageService.add({severity: 'info', summary: 'Row data', detail: event.data.engine + ' - ' + event.data.browser});
+    }
+
+    onPage(event: object): void {
         this.messageService.add({severity: 'info', summary: 'Index of first record:', detail: event.first});
         this.messageService.add({severity: 'info', summary: 'Number of rows: ', detail: event.rows});
     }
 
-    onSort(event: any): void {
+    onSort(event: object): void {
     }
 
-    onFilter(event: any): void {
+    onFilter(event: object): void {
         this.messageService.add({severity: 'info', summary: 'Filter object(field,value and matchmode):', detail: event.filters});
     }
 
-    onRowExpand(event: any): void {
+    onRowExpand(event: object): void {
         this.messageService.add({severity: 'info', summary: 'Expanded row:', detail: event.data});
     }
-    onRowCollapse(event: any): void {
+    onRowCollapse(event: object): void {
         this.messageService.add({severity: 'info', summary: 'Collapsed row:', detail: event.data});
     }
 
-    onRowGroupExpand(event: any): void {
+    onRowGroupExpand(event: object): void {
         this.messageService.add({severity: 'info', summary: 'Row group expanded:', detail: event.group});
     }
 
-    onRowGroupCollapse(event: any): void {
+    onRowGroupCollapse(event: object): void {
         this.messageService.add({severity: 'info', summary: 'Row group collapsed:', detail: event.group});
     }
 
@@ -268,8 +268,11 @@ export class TableDemoComponent implements OnInit {
         // event.sortOrder = Sort order as number, 1 for asc and -1 for dec
         // filters: FilterMetadata object having field as key and filter value, filter matchMode as value
 
-        this.browserService.getBrowsers().subscribe((browsers: any) =>
-            this.browsers = browsers.data.slice(event.first, (event.first + event.rows)));
+        this.browserService.getBrowsers().subscribe((browsers: any) => {
+            if (event.first && event.rows) {
+            this.browsers = browsers.data.slice(event.first, (event.first + event.rows));
+            }});
+    }
     }
 
     addBrowser(): void {
@@ -286,18 +289,18 @@ export class TableDemoComponent implements OnInit {
             browsers[this.findSelectedBrowserIndex()] = this.browser;
         }
         this.browsers = browsers;
-        this.browser = null;
+        this.browser = {} as Browser;
         this.displayDialog = false;
     }
 
     delete(): void {
         const index = this.findSelectedBrowserIndex();
         this.browsers = this.browsers.filter( (val, i) => i !== index);
-        this.browser = null;
+        this.browser = {} as Browser;
         this.displayDialog = false;
     }
 
-    onRowSelectCRUD(event: any): void {
+    onRowSelectCRUD(event: object): void {
         this.newBrowser = false;
         this.browser = Object.assign({}, event.data);
         this.displayDialog = true;

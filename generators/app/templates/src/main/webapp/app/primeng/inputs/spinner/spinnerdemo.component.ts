@@ -37,7 +37,7 @@ export class SpinnerDemoComponent implements OnInit {
         this.selectedType = 'readonly';
     }
 
-    onChange(event: any): void {
+    onChange(event: object): void {
         this.messageService.add(
             {severity: 'info', summary: 'Spinner value is changed'});
     }

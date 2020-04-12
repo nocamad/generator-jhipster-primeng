@@ -23,12 +23,12 @@ export class OrgChartDemoComponent implements OnInit, OnDestroy {
     private availableVCards: VCard[];
 
     constructor(private vcardService: VCardService, private messageService: MessageService) {
-        this.get$ = null;
+        this.get$ = {} as Subscription;
         this.dataBasic = [];
         this.dataAdvanced = [];
-        this.selectedNode = null;
+        this.selectedNode = {} as TreeNode;
         this.display = false;
-        this.selectedVCard = null;
+        this.selectedVCard = {} as VCard;
         this.availableVCards = [];
     }
 
@@ -123,7 +123,7 @@ export class OrgChartDemoComponent implements OnInit, OnDestroy {
         }
     }
 
-    onNodeSelect(event: any): void {
+    onNodeSelect(event: object): void {
         if (this.availableVCards == null) {
             this.get$ = this.vcardService.getVCards().subscribe(
                 (vcards: any) => {
@@ -139,8 +139,8 @@ export class OrgChartDemoComponent implements OnInit, OnDestroy {
         this.messageService.add({severity: 'info', summary: label});
     }
 
-    private showInfo(event: any): void {
-        this.selectedVCard = null;
+    private showInfo(event: object): void {
+        this.selectedVCard = {} as VCard;
 
         this.availableVCards.some((element: VCard) => {
             if (event.node.data && element.id === event.node.data.id) {

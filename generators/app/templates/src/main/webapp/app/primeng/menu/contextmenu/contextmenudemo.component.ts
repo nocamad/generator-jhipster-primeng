@@ -18,7 +18,7 @@ export class ContextMenuDemoComponent implements OnInit {
     private tableItems: MenuItem[];
 
     constructor(private employeeService: EmployeeService, private messageService: MessageService) {
-        this.selectedEmployee = null;
+        this.selectedEmployee = {} as Employee;
         this.employees = [];
         this.documentItems = [];
         this.targetItems = [];
